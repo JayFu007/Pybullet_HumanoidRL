@@ -1,2 +1,2 @@
-# Pybullet_HumanoidRL
+# 基于Pybullet打造的机器人强化学习环境：Pybullet_HumanoidRL
 Reinforcement Learning for humanoid robot with pybullet
