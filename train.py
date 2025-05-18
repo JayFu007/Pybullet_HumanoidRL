@@ -1,6 +1,6 @@
-import visualize
+import environment
 from agent import PPO
-from visualize import *
+from environment import *
 import numpy as np
 import torch
 import time

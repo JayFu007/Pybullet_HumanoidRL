@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from visualize import URDFEnv
+from environment import URDFEnv
 
 # 加载通过 torch.jit 保存的模型
 model = torch.jit.load("policy_6000.pt")

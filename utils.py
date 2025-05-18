@@ -1,4 +1,4 @@
-from visualize import URDFEnv
+from environment import URDFEnv
 from agent import PPO
 import pybullet as p
 import numpy as np
