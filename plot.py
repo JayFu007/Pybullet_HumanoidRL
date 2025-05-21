@@ -1,7 +1,7 @@
 # 读取日志文件并绘制奖励变化图
 import matplotlib.pyplot as plt
 
-def plot_rewards(log_file='s_reward_log.txt'):
+def plot_rewards(log_file='yes.txt'):
     steps = []
     rewards = []
     with open(log_file, 'r') as f:
@@ -21,4 +21,4 @@ def plot_rewards(log_file='s_reward_log.txt'):
     plt.title('Reward Function Over Time')
     plt.show()
 # 调用绘图函数
-plot_rewards('s_reward_log.txt')
+plot_rewards('yes.txt')

@@ -53,8 +53,8 @@ class AlexbotMiniEnv(gym.Env):
 
     def step(self, action):
         self.training_steps += 1
-        joint_names = ['leftjoint1', 'leftjoint2', 'leftjoint3', 'leftjoint4','leftjoint5', 'leftjoint6',
-                       'rightjoint1', 'rightjoint2', 'rightjoint3','rightjoint4', 'rightjoint5', 'rightjoint6']
+        joint_names = ['leftjoint1','leftjoint4', 'leftjoint6',
+                       'rightjoint1','rightjoint4', 'rightjoint6']
         for i, name in enumerate(joint_names):
             joint_id = [p.getJointInfo(self.robot, j)[1].decode() for j in range(p.getNumJoints(self.robot))].index(name)
             p.setJointMotorControl2(self.robot, joint_id, p.POSITION_CONTROL, targetPosition=action[i])
@@ -151,7 +151,7 @@ class AlexbotMiniEnv(gym.Env):
 
         # 3. 能耗惩罚：降低惩罚系数
         joint_states = [p.getJointState(self.robot, i) for i in range(6)]
-        energy_penalty = sum(abs(s[3]) for s in joint_states) * 0.001  # 使用扭矩绝对值
+        energy_penalty = sum(abs(s[3]) for s in joint_states) * 0.01  # 使用扭矩绝对值
 
         # 4. 简化其他奖励项
         stability_penalty = abs(base_pos[2] - 0.74) * 0.5  # 高度稳定性

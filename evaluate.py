@@ -3,7 +3,7 @@ from stable_baselines3 import PPO
 from alexbotmini_env import AlexbotMiniEnv
 
 env = AlexbotMiniEnv(render=True)
-model = PPO.load('models/alexbotmini_ppo_300000_steps.zip')
+model = PPO.load('models/4th_alexbotmini_ppo_300000_steps.zip')
 
 total_reward = 0
 total_steps = 0
