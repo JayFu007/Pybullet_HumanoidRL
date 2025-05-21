@@ -35,17 +35,32 @@ if __name__ == '__main__':
     # 创建4个并行环境
     env = SubprocVecEnv([make_env() for _ in range(3)])
 
+    # model = PPO(
+    #     'MlpPolicy',
+    #     env,
+    #     clip_range=0.2,
+    #     learning_rate=0.0001,
+    #     policy_kwargs={'net_arch': dict(pi=[64, 64], vf=[64, 64])},
+    #     verbose=1,
+    #     device='cpu'
+    # )
+    # model = PPO.load('models/t_alexbotmini_ppo_600000_steps.zip', env=env, device='cpu', verbose=1)
+    # 定义回调，每隔10万步保存一次模型
+
     model = PPO(
         'MlpPolicy',
         env,
-        clip_range=0.2,
-        learning_rate=0.0001,
-        policy_kwargs={'net_arch': dict(pi=[64, 64], vf=[64, 64])},
+        use_sde=True,  # 使用SDE
+        clip_range=0.3,  # 增大裁剪范围
+        learning_rate=3e-4,  # 提高学习率
+        n_steps=2048,  # 增加采样步数
+        batch_size=64,  # 减小批大小
+        policy_kwargs={
+            'net_arch': dict(pi=[512, 256], vf=[512, 256])  # 加深网络
+        },
         verbose=1,
         device='cpu'
     )
-    # model = PPO.load('models/t_alexbotmini_ppo_600000_steps.zip', env=env, device='cpu', verbose=1)
-    # 定义回调，每隔10万步保存一次模型
     checkpoint_callback = CheckpointCallback(save_freq=100000, save_path='./models/', name_prefix='alexbotmini_ppo')
 
     # 开始训练并传入回调
